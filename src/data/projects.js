@@ -233,10 +233,7 @@ export const projectsData = {
     techStack: ['React', 'Python', 'Data Visualization', 'AI Management', 'System Integration'],
     
     // Placeholder gambar (Ganti dengan nama file screenshot aslimu nanti)
-    images: [
-      'assets/ic-dashboard-main.jpg', 
-      'assets/ic-data-flow.jpg'
-    ],
+
     
     // Link (Opsional)
     link: '#',
