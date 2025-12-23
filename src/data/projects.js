@@ -95,7 +95,7 @@ export const projectsData = {
         name: "Ariel Febrio Hadi",
         role: "System Integration, Backend API Hapi.js, Deployment Railway, Firebase Integration",
         linkedin: "https://www.linkedin.com/in/ariel-febrio/",
-        photo: "assets/foto-ariel.jpg"
+        photo: "assets/foto-ariel.JPG"
       },
       {
         name: "Dave Ryano Firdaus Magenta",
@@ -203,7 +203,7 @@ export const projectsData = {
         name: "Ariel Febrio Hadi",
         role: "Lead Developer",
         linkedin: "https://www.linkedin.com/in/ariel-febrio/",
-        photo: "assets/foto-ariel.jpg"
+        photo: "assets/foto-ariel.JPG"
       }
     ]
   },
