@@ -15,6 +15,8 @@ export class HomeView {
     if (data.projects.main && data.projects.main.id) {
         allProjects.push(data.projects.main);
     }
+
+    const userPhoto = 'assets/foto-ariel.jpg';
     
     // Masukkan Secondary Projects
     if (data.projects.secondary && Array.isArray(data.projects.secondary)) {
