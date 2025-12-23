@@ -1,5 +1,4 @@
 // src/components/Loader/Loader.js
-import './loader.css';
 
 export class Loader {
   constructor(targetElement) {

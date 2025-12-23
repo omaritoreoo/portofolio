@@ -1,6 +1,5 @@
 // src/components/Navbar/Navbar.js
-import './Navbar.css';
-import { FunGame } from '../FunGame/FunGame'; // Import Class Game
+import { FunGame } from '../FunGame/FunGame.js'; // Import Class Game
 
 export class Navbar {
   constructor(targetElement) {

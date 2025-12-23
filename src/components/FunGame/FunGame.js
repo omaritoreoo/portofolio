@@ -1,4 +1,3 @@
-import './FunGame.css';
 
 export class FunGame {
   constructor(targetElement) {

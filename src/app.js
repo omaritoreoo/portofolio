@@ -3,7 +3,7 @@
 import { HomePresenter } from './pages/Home/HomePresenter.js';
 import { ProjectDetailPresenter } from './pages/Project/ProjectDetailPresenter.js';
 import { Loader } from './components/Loader/loader.js';
-import './style.css';
+
 
 class App {
   constructor() {
