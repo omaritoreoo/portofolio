@@ -1,0 +1,1379 @@
+/* src/style.css - FINAL CLEAN VERSION */
+
+/* =========================================
+   1. SETUP VARIABEL & GLOBAL
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700;900&display=swap');
+
+/* Matikan seleksi teks untuk seluruh elemen di website */
+* {
+  -webkit-user-select: none; /* Chrome, Safari, Opera */
+  -moz-user-select: none;    /* Firefox */
+  -ms-user-select: none;     /* Internet Explorer/Edge */
+  user-select: none;         /* Standar modern */
+  
+  /* Opsional: Biar kursor tidak berubah jadi garis (I-beam) saat diarahkan ke teks */
+  cursor: default; 
+}
+
+/* PENTING: Pengecualian untuk Input & Textarea */
+/* Jika Anda punya form kontak, user harus tetap bisa select teks yang mereka ketik */
+input, textarea {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  cursor: text;
+}
+
+/* PENTING: Pengecualian untuk Tombol/Link */
+/* Kembalikan kursor jadi jari tunjuk untuk elemen yang bisa diklik */
+a, button, .nav-link, .hamburger {
+  cursor: pointer;
+}
+
+:root {
+  --bg-color: #0e0e0e;
+  --text-primary: #ececec;
+  --text-secondary: #888888;
+  --accent: #ccff00; /* Hijau Neon Gen Z */
+  --card-bg: #1c1c1c;
+  --border: 1px solid #333;
+  --font-main: 'Space Grotesk', system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  /* Misal tinggi navbar Anda 80px, berikan jarak 100px */
+  scroll-margin-top: 100px; 
+}
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  overflow-x: hidden;
+}
+
+/* Efek Bintik-bintik (Noise Texture) */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 999;
+}
+
+/* =========================================
+   2. HERO SECTION
+   ========================================= */
+.hero-full-width {
+  width: 100vw;
+  min-height: 85vh;
+  position: relative;
+  background-color: var(--bg-color);
+  overflow: hidden;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  
+  /* Pattern Grid Background */
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: 1;
+}
+
+/* Glowing Blobs */
+.hero-full-width::before {
+  content: "";
+  position: absolute;
+  top: -10%; right: -5%;
+  width: 50vw; height: 50vw;
+  background: radial-gradient(circle, rgba(0, 247, 255, 0.25) 0%, transparent 70%);
+  filter: blur(80px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero-full-width::after {
+  content: "";
+  position: absolute;
+  bottom: -10%; left: -10%;
+  width: 60vw; height: 60vw;
+  background: radial-gradient(circle, rgba(204, 255, 0, 0.15) 0%, transparent 70%);
+  filter: blur(100px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+
+/* Hero Text Content */
+.hero-inner-content {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.hero-full-width h1 {
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  font-weight: 900;
+  line-height: 0.9;
+  margin: 10px 0;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+}
+
+.hero-full-width p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  max-width: 550px;
+  margin-top: 25px;
+  line-height: 1.6;
+}
+
+/* Status Badge & Avatar */
+.status-badge-container {
+  margin-bottom: 25px;
+  display: inline-block;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 15px; 
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(204, 255, 0, 0.2);
+  padding: 5px 20px 5px 5px;
+  border-radius: 60px; 
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.status-badge:hover {
+  border-color: var(--accent);
+  background: rgba(204, 255, 0, 0.05);
+  box-shadow: 0 0 20px rgba(204, 255, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.status-avatar {
+  width: 55px;  
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 10px rgba(204, 255, 0, 0.3);
+}
+
+.status-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  line-height: 1.2;
+}
+
+.blink {
+  color: var(--accent);
+  animation: blink-animation 1.5s infinite;
+  margin-left: 5px;
+  display: inline-block;
+}
+
+@keyframes blink-animation {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* Text Effects */
+.scrolling-layer {
+  position: relative;
+  display: inline-block;
+  color: var(--text-primary);
+  z-index: 2;
+}
+
+.scrolling-layer::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  z-index: -1;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+  animation: float-vertical 4s ease-in-out infinite alternate;
+  white-space: nowrap;
+}
+
+@keyframes float-vertical {
+  0% { transform: translateY(5%); }
+  100% { transform: translateY(18%); }
+}
+
+.outlined {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-primary);
+  opacity: 0.9;
+  display: inline-block;
+}
+
+/* =========================================
+   3. CYBER LANDSCAPE (DIVIDER)
+   ========================================= */
+.cyber-landscape {
+  position: relative;
+  width: 100vw;
+  height: 160px;
+  background: var(--bg-color); 
+  overflow: hidden;
+  z-index: 5;
+  margin-top: -60px;
+  margin-bottom: 0;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* Lantai Grid */
+.landscape-ground {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 60px;
+  background-image: 
+    linear-gradient(var(--accent) 1px, transparent 1px),
+    linear-gradient(90deg, var(--accent) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center bottom;
+  background-color: rgba(204, 255, 0, 0.05); 
+  border-top: 2px solid var(--accent);
+  box-shadow: 0 0 20px rgba(204, 255, 0, 0.4);
+  transform: perspective(500px) rotateX(20deg);
+  transform-origin: bottom;
+  opacity: 0.8;
+  z-index: 1; 
+}
+
+/* Parade Karakter */
+.character-parade {
+  position: absolute;
+  bottom: 70px; /* Di atas lantai */
+  left: 0;
+  width: 100%;
+  white-space: nowrap;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.parade-track {
+  display: inline-block;
+  animation: march-animation 25s linear infinite; 
+}
+
+@keyframes march-animation {
+  0% { transform: translateX(100vw); } 
+  100% { transform: translateX(-100%); }
+}
+
+.char {
+  margin: 0 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-box-reflect: below 10px linear-gradient(to bottom, transparent, rgba(0,0,0,0) 50%, rgba(204,255,0, 0.2));
+}
+
+.cyber-icon {
+  width: 40px;
+  height: 40px;
+  stroke: var(--accent); 
+  stroke-width: 1.5;
+  fill: none;
+  filter: drop-shadow(0 0 8px var(--accent));
+}
+
+/* Animasi Icon */
+.bounce { animation: bounce-walk 0.8s infinite alternate ease-in-out; }
+.floating { animation: float-walk 1.5s infinite alternate ease-in-out; }
+.spin { animation: spin-walk 3s infinite linear; }
+
+@keyframes bounce-walk { 0% { transform: translateY(0); } 100% { transform: translateY(-15px); } }
+@keyframes float-walk { 0% { transform: translateY(0) rotate(-5deg); } 100% { transform: translateY(-10px) rotate(5deg); } }
+@keyframes spin-walk { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* =========================================
+   4. PROJECTS SECTION (PREMIUM CARDS)
+   ========================================= */
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 100px 20px;
+}
+
+.section-title {
+    margin-bottom: 40px; 
+    font-size: 1.5rem; 
+    letter-spacing: 2px;
+    color: #888;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+/* Card Design */
+.premium-card {
+    position: relative;
+    min-height: 420px; 
+    background: #111;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: transform 0.4s ease, border-color 0.4s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.premium-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+}
+
+/* Layer 1: Background Image */
+.card-bg-image {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.15;
+    transition: transform 0.8s ease, opacity 0.4s ease;
+    filter: grayscale(100%);
+}
+
+.premium-card:hover .card-bg-image {
+    transform: scale(1.05);
+    opacity: 0.25; 
+}
+
+/* Layer 2: Icon Background (SVG Besar) */
+.card-icon-layer {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%; height: 80%;
+    pointer-events: none;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.card-bg-icon {
+    width: 100%; height: 100%;
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.03);
+    stroke-width: 0.5;
+    transition: stroke 0.4s ease, transform 0.4s ease;
+}
+
+.premium-card:hover .card-bg-icon {
+    stroke: rgba(204, 255, 0, 0.1);
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Layer 3: Gradient */
+.card-overlay-gradient {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, transparent 20%, #050505 90%);
+    z-index: 2;
+}
+
+/* Layer 4: Content (FIXED FLEXBOX) */
+.card-content-wrapper {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: column; 
+    padding: 30px; 
+}
+
+/* Posisi Tag di ATAS */
+.tags-wrapper {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: auto; /* Dorong elemen lain ke bawah */
+}
+
+.project-tag {
+    padding: 6px 14px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #eee;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tag-highlight {
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+    font-weight: 700;
+    border: none;
+}
+
+/* Posisi Text di BAWAH */
+.text-content {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.premium-title {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: white;
+    line-height: 1.1;
+}
+
+.premium-desc {
+    color: #aaa;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 20px;
+}
+
+.tech-list {
+    font-family: monospace;
+    color: var(--accent);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.arrow-circle {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    transition: 0.3s;
+}
+
+.premium-card:hover .arrow-circle {
+    background: var(--accent);
+    color: black;
+    transform: rotate(45deg);
+}
+
+/* =========================================
+   5. CONTACT SECTION
+   ========================================= */
+/* --- CONTACT SECTION FIX (NO SCROLL ISSUE) --- */
+
+.contact-section-separated {
+    position: relative;
+    width: 100%;
+    
+    /* FIX UTAMA: Agar padding tidak menambah lebar total */
+    box-sizing: border-box; 
+    
+    /* FIX KEDUA: Mencegah elemen anak yang kebesaran keluar dari kotak */
+    overflow: hidden; 
+    
+    padding: 120px 20px; 
+    background: #050505; 
+    border-top: 1px solid #222; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 0;
+}
+
+.contact-content {
+    max-width: 600px;
+    width: 100%;
+    /* Pastikan konten di dalamnya juga tidak melebar */
+    box-sizing: border-box; 
+    animation: fadeIn 1s ease-in-out;
+}
+
+.contact-heading {
+    /* Gunakan clamp agar font mengecil otomatis jika layar sempit */
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+    font-weight: 900;
+    color: #ffffff;
+    margin: 0 0 15px 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    
+    /* Mencegah teks panjang menembus layar */
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+}
+
+/* ... (Style subtext dan button biarkan sama) ... */
+.contact-sub {
+    color: #888888;
+    font-size: 1.2rem;
+    margin-bottom: 50px;
+}
+
+/* RESPONSIVE FIX KHUSUS MOBILE */
+@media (max-width: 768px) {
+    .contact-section-separated {
+        padding: 80px 20px;
+    }
+    
+    /* FIX FONT SIZE AGAR TIDAK LEBAR */
+    .contact-heading {
+        font-size: 2.2rem; /* Ukuran aman untuk HP kecil */
+    }
+    
+    /* FIX TOMBOL DI MOBILE */
+    .btn-neon-large {
+        width: 100%; /* Full width */
+        box-sizing: border-box; /* Agar padding tombol tidak bikin scroll */
+        padding: 16px 10px;
+        font-size: 0.9rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+.btn-neon-large {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 2px solid var(--accent); 
+    color: var(--accent);
+    padding: 18px 45px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-neon-large:hover {
+    background: var(--accent);
+    color: #000000;
+    box-shadow: 0 0 30px rgba(0, 255, 136, 0.4);
+    transform: translateY(-5px);
+}
+
+/* =========================================
+   6. PROJECT DETAIL PAGE
+   ========================================= */
+.project-detail-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-bottom: 100px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.detail-nav { margin-bottom: 30px; }
+.btn-back {
+  background: none; border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-main);
+  font-size: 1rem; cursor: pointer; padding: 0;
+  transition: 0.3s;
+}
+.btn-back:hover { color: var(--accent); letter-spacing: 1px; }
+
+.detail-hero {
+  position: relative;
+  width: 100%; height: 400px;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 40px;
+  border: 1px solid #333;
+}
+.detail-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: 0.5s;
+}
+.detail-hero:hover .detail-img { filter: grayscale(0%); }
+.detail-overlay {
+  position: absolute;
+  bottom: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to top, #0e0e0e 0%, transparent 80%);
+}
+.detail-title {
+  position: absolute;
+  bottom: 20px; left: 30px;
+  font-size: 3.5rem; margin: 0;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  text-shadow: 0 0 20px rgba(0,0,0,0.8);
+}
+
+.detail-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+}
+
+.info-block { margin-bottom: 25px; }
+.label {
+  display: block; font-size: 0.75rem; color: var(--text-secondary);
+  margin-bottom: 5px; letter-spacing: 1px;
+}
+.info-block p { margin: 0; font-weight: 500; font-size: 1.1rem; }
+.tech-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tech-pill {
+  font-size: 0.8rem; border: 1px solid #333;
+  padding: 4px 10px; border-radius: 4px; color: #aaa;
+}
+.action-buttons { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; }
+
+/* Tombol Launch (CTA) */
+.btn-launch {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--accent); color: black;
+  padding: 15px 30px; text-decoration: none;
+  font-weight: 900; text-transform: uppercase; letter-spacing: 1px;
+  clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(204, 255, 0, 0.4);
+  border: none;
+}
+.btn-launch:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 0 40px rgba(204, 255, 0, 0.8);
+  background: white;
+}
+
+/* Tombol Outline (Source Code) */
+.btn-outline-block {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 12px;
+  border: 1px solid #444; color: #ccc;
+  text-decoration: none; font-weight: bold; font-size: 0.9rem;
+  transition: 0.3s; background: rgba(255, 255, 255, 0.05);
+  box-sizing: border-box; /* Fix overflow */
+}
+.btn-outline-block:hover {
+  border-color: white; color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Deskripsi & Konten */
+.desc-header {
+  border-bottom: 1px solid #333; padding-bottom: 10px;
+  margin-bottom: 20px; font-family: monospace; color: var(--accent);
+}
+.desc-body p { line-height: 1.8; color: #ccc; margin-bottom: 20px; }
+.desc-body h3 { color: white; margin-top: 30px; }
+.desc-body ul { list-style-type: square; color: #bbb; padding-left: 20px; }
+.desc-body li { margin-bottom: 10px; }
+
+/* Team Section */
+.team-section { margin-top: 40px; }
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+.team-card {
+  display: flex; align-items: center; gap: 15px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid #333;
+  padding: 15px; text-decoration: none;
+  border-radius: 8px; transition: all 0.3s ease;
+}
+.team-card:hover {
+  border-color: var(--accent);
+  background: rgba(204, 255, 0, 0.05);
+  transform: translateY(-3px);
+}
+.team-avatar {
+  width: 50px; height: 50px;
+  border-radius: 50%; overflow: hidden;
+  border: 2px solid #333; flex-shrink: 0;
+}
+.avatar-img {
+  width: 100%; height: 100%;
+  object-fit: cover; filter: grayscale(100%);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+.team-card:hover .avatar-img { filter: grayscale(0%); transform: scale(1.1); }
+.team-info { flex: 1; }
+.team-name { color: white; font-weight: bold; font-size: 0.95rem; margin-bottom: 2px; }
+.team-role { color: #888; font-size: 0.75rem; text-transform: uppercase; }
+
+/* Video Demo */
+.video-section { margin: 40px 0; width: 100%; }
+.video-wrapper {
+  position: relative; padding-bottom: 56.25%; height: 0;
+  overflow: hidden; border-radius: 12px;
+  background: #000; border: 1px solid var(--border);
+}
+.video-wrapper iframe {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+}
+
+/* =========================================
+   8. ABOUT & EXPERIENCE SECTION
+   ========================================= */
+
+/* Wrapper Utama dengan Gradient Transition */
+.about-experience-wrapper {
+    width: 100%;
+    position: relative;
+    /* Gradient halus dari Hitam Contact (#050505) ke Dark Grey */
+    background: linear-gradient(to bottom, #050505 0%, #0e0e0e 15%, #0e0e0e 100%);
+    color: var(--text-primary);
+    padding-bottom: 80px;
+    overflow: hidden; /* Mencegah scroll samping */
+}
+
+.section-heading {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 900;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.center-text { text-align: center; }
+.text-accent { color: var(--accent); }
+
+/* --- ABOUT ME STYLING --- */
+.about-section {
+    padding: 80px 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.about-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Foto kiri (kecil), Teks kanan (lebar) */
+    gap: 60px;
+    align-items: center;
+}
+
+/* Foto Profile */
+.about-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.profile-img {
+    width: 100%;
+    border-radius: 20px;
+    filter: grayscale(100%); /* Hitam putih biar artistik */
+    transition: 0.5s ease;
+    border: 1px solid #333;
+    position: relative;
+    z-index: 2;
+}
+
+.about-image-wrapper:hover .profile-img {
+    filter: grayscale(0%); /* Berwarna saat hover */
+    transform: scale(1.02);
+}
+
+/* Glow Effect di belakang foto */
+.img-glow {
+    position: absolute;
+    top: 20px; left: 20px;
+    width: 100%; height: 100%;
+    border: 2px solid var(--accent);
+    border-radius: 20px;
+    z-index: 1;
+    transition: 0.3s;
+}
+
+.about-image-wrapper:hover .img-glow {
+    top: 10px; left: 10px;
+    box-shadow: 0 0 20px rgba(204, 255, 0, 0.2);
+}
+
+/* Teks About */
+.about-text-content p {
+    color: #ccc;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+.about-text-content strong {
+    color: white;
+}
+
+.mini-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.mini-skills span {
+    font-size: 0.8rem;
+    padding: 5px 12px;
+    border: 1px solid #333;
+    border-radius: 50px;
+    color: var(--accent);
+    font-family: monospace;
+}
+
+/* --- EXPERIENCE TIMELINE STYLING --- */
+.experience-section {
+    padding: 40px 20px;
+    max-width: 800px; /* Lebih sempit biar enak dibaca */
+    margin: 0 auto;
+}
+
+.timeline {
+    position: relative;
+    border-left: 2px solid #333;
+    padding-left: 40px;
+    margin-left: 20px;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+}
+
+/* Titik Timeline */
+.timeline-dot {
+    position: absolute;
+    left: -49px; /* Pas di garis */
+    top: 5px;
+    width: 16px; height: 16px;
+    background: #0e0e0e;
+    border: 2px solid #555;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+
+.timeline-item:hover .timeline-dot {
+    border-color: var(--accent);
+    background: var(--accent);
+    box-shadow: 0 0 15px var(--accent);
+}
+
+.timeline-date {
+    font-size: 0.85rem;
+    color: var(--accent);
+    font-family: monospace;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+.timeline-content h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.3rem;
+    color: white;
+}
+
+.company {
+    display: block;
+    font-size: 0.95rem;
+    color: #888;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+.timeline-content p, .exp-list {
+    color: #bbb;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.exp-list {
+    padding-left: 18px;
+    list-style-type: disc;
+}
+.exp-list li { margin-bottom: 5px; }
+
+/* RESPONSIVE MOBILE */
+@media (max-width: 768px) {
+    .about-container {
+        grid-template-columns: 1fr; /* Stack vertikal */
+        gap: 40px;
+        text-align: left;
+    }
+
+    .about-image-wrapper {
+        max-width: 280px; /* Kecilin foto di HP */
+        margin: 0; /* Rata kiri biar rapi dengan teks */
+    }
+    
+    .timeline {
+        padding-left: 25px;
+        margin-left: 10px;
+    }
+    
+    .timeline-dot {
+        left: -34px;
+        width: 14px; height: 14px;
+    }
+    
+    .section-heading {
+        font-size: 2.2rem;
+    }
+}
+
+/* =========================================
+   9. SOCIAL CONNECT / FOOTER SECTION
+   ========================================= */
+
+.social-footer-section {
+    padding: 60px 20px 100px 20px; /* Padding bawah besar biar ga mentok */
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    margin-top: 40px;
+}
+
+/* Card Style */
+.social-card {
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px solid #333;
+    padding: 25px 15px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.social-card span {
+    color: #888;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.social-icon {
+    width: 28px;
+    height: 28px;
+    fill: #ccc; /* Warna default icon */
+    transition: fill 0.3s, transform 0.3s;
+}
+
+/* =========================================
+   11. PROJECT CAROUSEL / SLIDER (REVISI NAVIGASI)
+   ========================================= */
+
+/* Wrapper Utama Slider */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    /* Overflow hidden dihapus sementara agar tombol yang keluar dikit tetap kelihatan, 
+       tapi kita atur padding agar rapi */
+    overflow: hidden; 
+    padding: 20px 0 50px 0;
+}
+
+/* Header kontrol: Judul saja (Tombol dipindah) */
+.carousel-header {
+    margin-bottom: 30px;
+    padding: 0 5px;
+    text-align: left; /* Judul rata kiri */
+}
+
+/* Jalur Slider (Track) */
+.carousel-track {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    width: max-content;
+    padding: 0 10px; /* Sedikit padding agar kartu pertama ga mepet banget */
+}
+
+/* Item Kartu */
+.carousel-item {
+    width: 400px;
+    flex-shrink: 0;
+}
+
+/* --- TOMBOL NAVIGASI BARU (FLOATING) --- */
+
+.nav-btn {
+    position: absolute;
+    top: 50%; /* Tengah secara vertikal */
+    transform: translateY(-50%); /* Kompensasi tinggi tombol */
+    z-index: 20; /* Pastikan di atas kartu project */
+    
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    
+    /* Desain Glassmorphism Neon agar JELAS TERLIHAT */
+    background: rgba(0, 0, 0, 0.6); /* Hitam transparan */
+    backdrop-filter: blur(5px);
+    border: 2px solid var(--accent, #ccff00); /* Border Neon */
+    color: var(--accent, #ccff00); /* Icon Neon */
+    
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8); /* Shadow biar misah dari background */
+}
+
+/* Posisi Tombol Kiri */
+#prev-btn {
+    left: 10px;
+}
+
+/* Posisi Tombol Kanan */
+#next-btn {
+    right: 10px;
+}
+
+/* Efek Hover */
+.nav-btn:hover {
+    background: var(--accent, #ccff00); /* Warna penuh saat hover */
+    color: #000; /* Icon jadi hitam */
+    box-shadow: 0 0 20px var(--accent, #ccff00); /* Glowing effect */
+    transform: translateY(-50%) scale(1.1); /* Sedikit membesar */
+}
+
+/* Tombol Disabled (Misal mentok kiri/kanan) */
+.nav-btn.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    background: rgba(0, 0, 0, 0.8);
+    border-color: #555;
+    color: #555;
+    box-shadow: none;
+    pointer-events: none; /* Ga bisa diklik */
+}
+
+/* Responsive HP */
+@media (max-width: 768px) {
+    .carousel-item {
+        width: 85vw;
+    }
+    
+    /* Di HP tombol agak kecil biar ga nutupin konten */
+    .nav-btn {
+        width: 45px; height: 45px;
+    }
+    #prev-btn { left: 5px; }
+    #next-btn { right: 5px; }
+}
+
+/* --- HOVER EFFECTS PER BRAND --- */
+
+/* 1. Email (Red/Orange) */
+.social-card.email:hover { border-color: #ff5e57; background: rgba(255, 94, 87, 0.1); }
+.social-card.email:hover .social-icon { fill: #ff5e57; transform: scale(1.1); }
+.social-card.email:hover span { color: #ff5e57; }
+
+/* 2. LinkedIn (Blue) */
+.social-card.linkedin:hover { border-color: #0077b5; background: rgba(0, 119, 181, 0.1); }
+.social-card.linkedin:hover .social-icon { fill: #0077b5; transform: scale(1.1); }
+.social-card.linkedin:hover span { color: #0077b5; }
+
+/* 3. Instagram (Pink/Purple) */
+.social-card.instagram:hover { border-color: #e1306c; background: rgba(225, 48, 108, 0.1); }
+.social-card.instagram:hover .social-icon { fill: #e1306c; transform: scale(1.1); }
+.social-card.instagram:hover span { color: #e1306c; }
+
+/* 4. YouTube (Red) */
+.social-card.youtube:hover { border-color: #ff0000; background: rgba(255, 0, 0, 0.1); }
+.social-card.youtube:hover .social-icon { fill: #ff0000; transform: scale(1.1); }
+.social-card.youtube:hover span { color: #ff0000; }
+
+/* 5. Twitter/X (White/Black) */
+.social-card.twitter:hover { border-color: #ffffff; background: rgba(255, 255, 255, 0.1); }
+.social-card.twitter:hover .social-icon { fill: #ffffff; transform: scale(1.1); }
+.social-card.twitter:hover span { color: #ffffff; }
+
+/* 6. Spotify (Green) */
+.social-card.spotify:hover { border-color: #1db954; background: rgba(29, 185, 84, 0.1); }
+.social-card.spotify:hover .social-icon { fill: #1db954; transform: scale(1.1); }
+.social-card.spotify:hover span { color: #1db954; }
+
+/* 7. Discord (Indigo) */
+.social-card.discord:hover { border-color: #5865F2; background: rgba(88, 101, 242, 0.1); }
+.social-card.discord:hover .social-icon { fill: #5865F2; transform: scale(1.1); }
+.social-card.discord:hover span { color: #5865F2; }
+
+
+/* Responsive Grid adjustment */
+@media (max-width: 600px) {
+    .social-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 kolom di HP */
+    }
+}
+
+/* =========================================
+   10. FLOATING BACKGROUND ICONS (NEON TWEEN)
+   ========================================= */
+
+/* Container agar icon tidak keluar area */
+.contact-section-separated,
+.about-experience-wrapper {
+    position: relative;
+    overflow: hidden; /* Penting: biar icon yg melayang di pinggir ga bikin scroll horizontal */
+    z-index: 1;
+}
+
+/* Pastikan konten di dalamnya (text/card) tetap di atas icon */
+.contact-content, 
+.about-container, 
+.experience-section,
+.social-footer-section {
+    position: relative;
+    z-index: 10; /* Konten lebih tinggi dari background */
+}
+
+/* Style Umum Icon Melayang */
+.bg-floating-icon {
+    position: absolute;
+    opacity: 0.07; /* Transparan banget biar ga ganggu baca */
+    pointer-events: none; /* Biar ga bisa diklik */
+    animation: floatTween 6s ease-in-out infinite;
+    z-index: 0; /* Di belakang konten */
+    filter: drop-shadow(0 0 5px currentColor); /* Efek Neon pudar */
+}
+
+/* Keyframe Animasi Melayang (Naik Turun + Putar Dikit) */
+@keyframes floatTween {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(3deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* --- VARIASI POSISI & WARNA & DELAY --- */
+
+/* Icon 1: Code Bracket (Kiri Atas) - Warna Cyan */
+.icon-1 {
+    top: 5%; left: 5%;
+    width: 150px;
+    color: #00f3ff;
+    animation-delay: 0s;
+}
+
+/* Icon 2: Atom/React (Kanan Atas) - Warna Ungu */
+.icon-2 {
+    top: 10%; right: -20px;
+    width: 200px;
+    color: #bc13fe;
+    animation-delay: 1s;
+}
+
+/* Icon 3: Curly Braces (Tengah Kiri) - Warna Hijau */
+.icon-3 {
+    top: 40%; left: -30px;
+    width: 180px;
+    color: #0aff0a;
+    animation-delay: 2s;
+}
+
+/* Icon 4: Terminal/Command (Tengah Kanan) - Warna Biru */
+.icon-4 {
+    top: 60%; right: 5%;
+    width: 120px;
+    color: #0077b5;
+    animation-delay: 0.5s;
+}
+
+/* Icon 5: AI Chip/Hexagon (Bawah Kiri) - Warna Merah/Pink */
+.icon-5 {
+    bottom: 5%; left: 10%;
+    width: 160px;
+    color: #ff0055;
+    animation-delay: 1.5s;
+}
+
+/* Icon 6: Network Node (Bawah Tengah/Kanan) - Warna Orange */
+.icon-6 {
+    bottom: 15%; right: 15%;
+    width: 140px;
+    color: #ffaa00;
+    animation-delay: 2.5s;
+}
+
+/* =========================================
+   12. SITE FOOTER
+   ========================================= */
+
+.cyber-footer {
+    background-color: #050505; /* Hitam pekat */
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Garis pemisah tipis */
+    padding: 25px 0;
+    margin-top: 0;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Courier New', monospace; /* Font coding style */
+}
+
+/* Bagian Kiri (Brand & Copy) */
+.footer-left {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.brand-text {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.brand-text .dot {
+    color: #00f3ff; /* Aksen Cyan */
+}
+
+.copyright {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* Bagian Kanan (Tech Stack info) */
+.footer-right {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.neon-text {
+    color: #00f3ff;
+    text-shadow: 0 0 5px rgba(0, 243, 255, 0.3);
+}
+
+/* Responsif untuk HP */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .footer-left {
+        align-items: center;
+    }
+}
+
+/* RESPONSIVE: Kecilin icon di HP biar ga penuh */
+@media (max-width: 768px) {
+    .bg-floating-icon {
+        opacity: 0.05; /* Lebih transparan lagi di HP */
+    }
+    .icon-1 { width: 80px; top: 2%; }
+    .icon-2 { width: 100px; top: 5%; }
+    .icon-3 { width: 90px; }
+    .icon-4 { width: 70px; }
+    .icon-5 { width: 80px; }
+    .icon-6 { width: 70px; }
+}
+
+/* =========================================
+   7. RESPONSIVE / MEDIA QUERIES (CONSOLIDATED)
+   ========================================= */
+
+/* Tablet & Laptop Kecil (Max 900px) */
+@media (max-width: 900px) {
+  .projects-grid {
+      grid-template-columns: 1fr; /* Project jadi 1 kolom */
+  }
+  .hero-full-width h1 {
+      font-size: 3.8rem;
+  }
+}
+
+/* Mobile Devices (Max 768px) */
+@media (max-width: 768px) {
+  /* Contact Section */
+  .contact-section-separated {
+      padding: 80px 20px;
+  }
+  .contact-heading {
+      font-size: 2.5rem;
+  }
+  .btn-neon-large {
+      padding: 15px 30px;
+      width: 100%;
+      font-size: 0.9rem;
+  }
+
+  /* Detail Page */
+  .detail-content { grid-template-columns: 1fr; }
+  .detail-title { font-size: 2rem; }
+  .detail-hero { height: 250px; }
+  
+  /* Hero CTA */
+  .hero-cta-container {
+    bottom: 20px; right: 20px;
+  }
+  .btn-launch {
+    padding: 10px 20px; font-size: 0.9rem;
+  }
+}
+

@@ -1,0 +1,106 @@
+/* src/components/Loader/Loader.css */
+
+/* Container Full Screen */
+#page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999; /* Harus paling atas, di atas Navbar/Game */
+  
+  /* Background Gelap dengan Blur yang sangat kuat */
+  background: rgba(10, 10, 10, 0.8); 
+  backdrop-filter: blur(20px); /* Ini yang bikin efek BLURRY */
+  -webkit-backdrop-filter: blur(20px); /* Untuk Safari */
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* Transisi Halus saat menghilang */
+  transition: all 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* KELAS UNTUK MENYEMBUNYIKAN LOADER */
+#page-loader.hidden {
+  opacity: 0;
+  backdrop-filter: blur(0px); /* Blur perlahan jadi tajam */
+  -webkit-backdrop-filter: blur(0px);
+  pointer-events: none; /* Agar bisa klik konten di bawahnya saat fading */
+}
+
+/* --- ISI LOADER --- */
+.loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+.spinner-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Style untuk Icon SVG */
+.loading-svg {
+  color: #ccff00; /* Warna Hijau Neon */
+  
+  /* Efek Glowing pada Garisnya */
+  filter: drop-shadow(0 0 8px rgba(170, 255, 0, 0.6));
+  
+  /* Animasi Putar Terus Menerus */
+  animation: spin 1s linear infinite;
+}
+
+/* Animasi Putar */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Teks Loading */
+.loader-text {
+  color: white;
+  font-family: monospace; /* Font gaya teknis */
+  font-size: 1rem;
+  letter-spacing: 5px;
+  font-weight: bold;
+  animation: fade-text 2s infinite ease-in-out;
+}
+
+/* --- KEYFRAMES ANIMASI --- */
+
+/* Denyut Bola Cahaya */
+@keyframes pulse-glow {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.6;
+    box-shadow: 0 0 20px #ccff00;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+    box-shadow: 0 0 50px #ccff00, 0 0 80px rgba(166, 255, 0, 0.5);
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.6;
+    box-shadow: 0 0 20px #ccff00;
+  }
+}
+
+/* Kedip Teks */
+@keyframes fade-text {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}

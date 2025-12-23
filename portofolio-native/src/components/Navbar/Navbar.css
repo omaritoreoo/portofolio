@@ -1,0 +1,142 @@
+/* src/components/Navbar/Navbar.css */
+
+/* Container Utama: Mengatur posisi di bawah tengah */
+.navbar-container {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Jarak antara menu kiri, tombol game, dan menu kanan */
+}
+
+/* Bagian Sayap Kiri & Kanan (Glassmorphism) */
+.nav-segment {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 10px;
+  
+  background: rgba(20, 20, 20, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 50px; /* Bentuk kapsul */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Link Navigasi */
+.nav-link {
+  text-decoration: none;
+  color: #aaa;
+  font-family: sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  padding: 10px 20px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: visible; /* Biar sparkle kelihatan */
+}
+
+.nav-link:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-link.active {
+  background: white;
+  color: black;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+/* --- TOMBOL GAME TENGAH (The PS Button) --- */
+.center-game-btn {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  
+  /* Background Gelap tapi Glowing */
+  background: radial-gradient(circle at 30% 30%, #2a2a2a, #000);
+  color: white;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  
+  /* Efek Melayang Sedikit ke Atas (Break the line) */
+  transform: translateY(-15px); 
+  
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 
+              inset 0 2px 5px rgba(255,255,255,0.2);
+  
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  z-index: 1000;
+}
+
+.center-game-btn svg {
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 0 5px rgba(251, 255, 0, 0.5)); /* Icon glowing */
+  transition: 0.3s;
+}
+
+/* Efek Hover Tombol Game */
+.center-game-btn:hover {
+  transform: translateY(-20px) scale(1.1); /* Naik lagi dikit */
+  border-color: #ccff00;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.4), 
+              0 15px 30px rgba(0,0,0,0.6);
+}
+
+.center-game-btn:hover svg {
+  color: #ccff00;
+  transform: rotate(15deg);
+}
+
+/* Sparkle (Copy paste yang lama) */
+.sparkle {
+  position: absolute;
+  top: 50%; left: 50%; width: 6px; height: 6px;
+  border-radius: 50%; background-color: #ccff00;
+  pointer-events: none; transform: translate(-50%, -50%);
+}
+@keyframes sparkle-burst {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0); opacity: 0; }
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 768px) {
+  .navbar-container {
+    bottom: 20px;
+    gap: 8px;
+    width: 95%;
+  }
+
+  .nav-segment {
+    padding: 5px;
+    flex: 1; /* Biar panjang kiri kanan sama */
+    justify-content: center;
+  }
+  
+  .nav-link {
+    font-size: 0.7rem;
+    padding: 8px 12px; /* Lebih kecil */
+  }
+
+  .center-game-btn {
+    width: 55px; /* Kecilin dikit tombolnya */
+    height: 55px;
+    transform: translateY(-10px); /* Jangan terlalu naik */
+  }
+  
+  .center-game-btn:hover {
+     transform: translateY(-12px) scale(1.05);
+  }
+}
