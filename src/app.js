@@ -13,15 +13,21 @@ class App {
     // Sesuaikan persis dengan URL GitHub kamu: /portofolio
     this.repoName = '/portofolio'; 
 
-    this.router = {
-      navigateTo: (path) => {
-        // Saat pindah halaman, kita tempelkan nama repo agar URL tetap valid
-        // Misal: user klik project -> URL jadi /portofolio/project/1
-        const fullPath = this.repoName + path;
-        window.history.pushState({}, '', fullPath);
-        this.renderPage(fullPath);
-      }
-    };
+    // src/app.js
+
+  this.router = {
+    navigateTo: (path) => {
+      // TAMBAHKAN LOGIC INI:
+      // Pastikan ada tanda kurung '/' di antara nama repo dan path
+      const targetPath = path.startsWith('/') ? path : '/' + path;
+      
+      // Gabungkan
+      const fullPath = this.repoName + targetPath;
+      
+      window.history.pushState({}, '', fullPath);
+      this.renderPage(fullPath);
+    }
+  };
 
     window.addEventListener('popstate', () => {
       this.renderPage(window.location.pathname);

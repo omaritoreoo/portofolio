@@ -304,17 +304,27 @@ export class HomeView {
 
     if (!track || !prevBtn || !nextBtn) return;
 
-    const updatePosition = () => {
+      const updatePosition = () => {
+        // 1. PENGAMAN: Cek apakah track masih ada di layar?
+        if (!track) return;
+
         const items = track.querySelectorAll('.carousel-item');
         if (items.length === 0) return;
         
+        // 2. PENGAMAN: Cek apakah container masih ada? (PENTING)
+        // Saat pindah halaman, this.root mungkin sudah kosong
+        const container = this.root.querySelector('.carousel-container');
+        if (!container) return; // Stop jika container tidak ditemukan
+
         const itemWidth = items[0].offsetWidth; 
         const gap = 30; 
         const moveAmount = itemWidth + gap;
 
         track.style.transform = `translateX(-${this.currentSlide * moveAmount}px)`;
 
-        const containerWidth = this.root.querySelector('.carousel-container').offsetWidth;
+        // Sekarang aman untuk ambil offsetWidth karena container sudah dicek
+        const containerWidth = container.offsetWidth;
+        
         // eslint-disable-next-line no-unused-vars
         const visibleItems = Math.floor(containerWidth / moveAmount);
         
@@ -328,9 +338,9 @@ export class HomeView {
         const currentScroll = this.currentSlide * moveAmount;
         
         if (currentScroll + containerWidth >= totalTrackWidth - 50) { 
-             nextBtn.classList.add('disabled');
+            nextBtn.classList.add('disabled');
         } else {
-             nextBtn.classList.remove('disabled');
+            nextBtn.classList.remove('disabled');
         }
     };
 
