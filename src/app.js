@@ -2,17 +2,24 @@
 
 import { HomePresenter } from './pages/Home/HomePresenter.js';
 import { ProjectDetailPresenter } from './pages/Project/ProjectDetailPresenter.js';
-import { Loader } from './components/Loader/loader.js';
-
+import { Loader } from './components/Loader/loader.js'; 
+// Pastikan nama file loader.js kecil/besar sesuai file aslinya
 
 class App {
   constructor() {
     this.root = document.getElementById('app');
     
+    // --- KONFIGURASI NAMA REPO (PENTING!) ---
+    // Sesuaikan persis dengan URL GitHub kamu: /portofolio
+    this.repoName = '/portofolio'; 
+
     this.router = {
       navigateTo: (path) => {
-        window.history.pushState({}, '', path);
-        this.renderPage(path);
+        // Saat pindah halaman, kita tempelkan nama repo agar URL tetap valid
+        // Misal: user klik project -> URL jadi /portofolio/project/1
+        const fullPath = this.repoName + path;
+        window.history.pushState({}, '', fullPath);
+        this.renderPage(fullPath);
       }
     };
 
@@ -33,33 +40,40 @@ class App {
     setTimeout(() => {
         this.root.innerHTML = ''; 
 
-        // --- PERBAIKAN ROUTER UNTUK GITHUB PAGES ---
+        // --- PERBAIKAN ROUTER ---
         
-        // Masukkan nama repository kamu di sini (sesuai yang dibuat di Langkah 1)
-        // Jika nanti pakai domain sendiri (misal ariel.com), kosongkan jadi ''
-        const repoName = '/portfolio'; 
-        
-        // Kita hapus nama repo dari path agar Router tidak bingung
-        let normalizedPath = path.replace(repoName, '');
-        
-        // Hapus slash depan/belakang
+        let normalizedPath = path;
+
+        // 1. Cek apakah path mengandung nama repo? Jika ya, hapus.
+        // Contoh: "/portofolio/index.html" -> "/index.html"
+        if (normalizedPath.startsWith(this.repoName)) {
+            normalizedPath = normalizedPath.replace(this.repoName, '');
+        }
+
+        // 2. Bersihkan slash di depan & belakang
+        // Contoh: "/index.html" -> "index.html"
         const cleanPath = normalizedPath.replace(/^\/|\/$/g, '');
         
         const parts = cleanPath.split('/');
-        const route = parts[0] === '' ? 'home' : parts[0];
+        
+        // 3. Tentukan Route (Logic agar Home terdeteksi)
+        // Jika kosong '' atau 'index.html', arahkan ke home
+        let route = parts[0];
+        if (route === '' || route === 'index.html') {
+            route = 'home';
+        }
 
-        // --- AKHIR PERBAIKAN ---
+        // --- SWITCH HALAMAN ---
 
         if (route === 'home') {
-             // ... (kode sama) ...
              const homePresenter = new HomePresenter(this.router);
              homePresenter.init();
         } else if (route === 'project') {
-             // ... (kode sama) ...
              const projectId = parts[1];
              const detailPresenter = new ProjectDetailPresenter(this.router);
              detailPresenter.init(projectId);
         } else {
+             console.log("Error 404. Path asli:", path, "| Path bersih:", route);
              this.root.innerHTML = '<h1 style="color:white; text-align:center; margin-top:100px;">404 - Page Not Found</h1>';
         }
         

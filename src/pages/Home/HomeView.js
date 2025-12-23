@@ -1,4 +1,3 @@
-import userPhoto from 'assets/foto-ariel.jpg';
 
 export class HomeView {
   constructor(rootElement) {
