@@ -21,7 +21,8 @@ export const projectsData = {
 
     // Ganti dengan path gambar aslimu (dari folder public/images)
     // Gunakan screenshot dashboard utama sebagai gambar pertama (hero)
-    image: "../../../assets/projek.png",
+    image: "assets/projek.png",
+
 
 
     // KONTEN UTAMA (HTML)
@@ -94,31 +95,31 @@ export const projectsData = {
         name: "Ariel Febrio Hadi",
         role: "System Integration, Backend API Hapi.js, Deployment Railway, Firebase Integration",
         linkedin: "https://www.linkedin.com/in/ariel-febrio/",
-        photo: "./../../assets/foto-ariel.jpg"
+        photo: "assets/foto-ariel.jpg"
       },
       {
         name: "Dave Ryano Firdaus Magenta",
         role: "UI/UX Design, Responsive Layout, Data Visualization, Chart.js",
         linkedin: "https://www.linkedin.com/in/dave-ryano-firdaus-magenta/",
-        photo: "./../../assets/foto-ano.png"
+        photo: "assets/foto-ano.png"
       },
       {
         name: "Michael Briant",
         role: "Fleet Management Module, Vessel Manager, Report Generation",
         linkedin: "https://www.linkedin.com/in/michael-briant/",
-        photo: "./../../assets/foto-michael.png"
+        photo: "assets/foto-michael.png"
       },
       {
         name: "Yustianas Rombon",
         role: " Monte Carlo Simulation Engine, Model Optimization, Weather Prediction Service",
         linkedin: "https://www.linkedin.com/in/yustianas-rombon/",
-        photo: "./../../assets/foto-rombon.png"
+        photo: "assets/foto-rombon.png"
       },
       {
         name: "David Dewanto",
         role: "RAG System, Knowledge Base, Chatbot Logic, LangChain Implementation",
         linkedin: "https://www.linkedin.com/in/david-dewanto/",
-        photo: "./../../assets/foto-david.png"
+        photo: "assets/foto-david.png"
       }
     ]
   },
@@ -144,7 +145,7 @@ export const projectsData = {
     ],
 
     // Ganti dengan path gambar project BEM kamu
-    image: "../../../assets/projekbem.png",
+    image: "assets/projekbem.png",
 
 
     // Deskripsi Lengkap (HTML Format)
@@ -202,7 +203,7 @@ export const projectsData = {
         name: "Ariel Febrio Hadi",
         role: "Lead Developer",
         linkedin: "https://www.linkedin.com/in/ariel-febrio/",
-        photo: "./../../assets/foto-ariel.jpg"
+        photo: "assets/foto-ariel.jpg"
       }
     ]
   },
@@ -233,8 +234,8 @@ export const projectsData = {
     
     // Placeholder gambar (Ganti dengan nama file screenshot aslimu nanti)
     images: [
-      'assets/projects/ic-dashboard-main.jpg', 
-      'assets/projects/ic-data-flow.jpg'
+      'assets/ic-dashboard-main.jpg', 
+      'assets/ic-data-flow.jpg'
     ],
     
     // Link (Opsional)
