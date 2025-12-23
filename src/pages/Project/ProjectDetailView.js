@@ -5,13 +5,32 @@ export class ProjectDetailView {
     this.root = rootElement;
   }
 
-  // TIDAK ADA LAGI method _getYouTubeId di sini!
-
   render(data, onBackClick) {
-    // Scroll ke atas saat halaman dimuat
     window.scrollTo(0, 0);
 
-    // Render HTML murni berdasarkan data yang sudah diolah Presenter
+    // --- PERBAIKAN UTAMA: LOGIKA BASE PATH ---
+    // 1. Cek apakah kita sedang di GitHub Pages?
+    const isGitHub = window.location.hostname.includes('github.io');
+    
+    // 2. Tentukan awalan alamat (Prefix)
+    // Jika di GitHub, tambahkan '/portofolio/'. Jika di Localhost, cukup '/'
+    const repoName = 'portofolio'; // Pastikan ejaan sama dengan nama repo kamu
+    const basePath = isGitHub ? `/${repoName}/` : '/';
+
+    // 3. Fungsi pembantu untuk memperbaiki link gambar
+    const fixImg = (path) => {
+        if (!path) return '';
+        // Jika path adalah link internet (https://...), biarkan saja
+        if (path.startsWith('http')) return path;
+        
+        // Hapus tanda '/' di depan nama file jika ada, biar tidak double
+        const cleanPath = path.startsWith('/') ? path.slice(1) : path;
+        
+        // Gabungkan: /portofolio/ + assets/foto.jpg
+        return `${basePath}${cleanPath}`;
+    };
+    // ------------------------------------------
+
     this.root.innerHTML = `
       <div class="project-detail-container fade-in">
         
@@ -22,7 +41,7 @@ export class ProjectDetailView {
         </div>
 
         <div class="detail-hero">
-          <img src="${data.mainImage}" alt="${data.title}" class="detail-img">
+          <img src="${fixImg(data.mainImage)}" alt="${data.title}" class="detail-img">
           <div class="detail-overlay"></div>
           
           <h1 class="detail-title">${data.title}</h1>
@@ -99,7 +118,7 @@ export class ProjectDetailView {
                   ${data.team.map(member => `
                     <a href="${member.linkedin}" target="_blank" class="team-card">
                        <div class="team-avatar">
-                          <img src="${member.photo}" alt="${member.name}" class="avatar-img">
+                          <img src="${fixImg(member.photo)}" alt="${member.name}" class="avatar-img">
                        </div>
                        <div class="team-info">
                           <div class="team-name">${member.name}</div>
@@ -117,7 +136,6 @@ export class ProjectDetailView {
       </div>
     `;
 
-    // Event Binding
     const btnBack = this.root.querySelector('#btn-back');
     if(btnBack) btnBack.addEventListener('click', onBackClick);
   }
